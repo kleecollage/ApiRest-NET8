@@ -32,6 +32,7 @@ public class ExampleController(IWebHostEnvironment hostingEnvironment): Controll
   {
     return Content($"GET Method | ID = {id} | Slug = {slug}");
   }
+
   // ##############################   POST   ############################## //
   [HttpPost]
   [Route("/api/example")]
@@ -72,6 +73,7 @@ public class ExampleController(IWebHostEnvironment hostingEnvironment): Controll
     return Content($"PUT Method | ID = {Id}");
   }
 
+  // ##############################   DELETE   ############################## //
   [HttpDelete]
   [Route("/api/example/{id}")]
   public IActionResult DeleteMethod(int Id)
