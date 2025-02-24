@@ -1,3 +1,6 @@
+using ApiRest.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +10,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers(); // To work with controllers
 builder.Services.AddCors(); // CORS
+
+// MSSQL Connection
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection Error.");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+/// MSSQL Connection ///
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
