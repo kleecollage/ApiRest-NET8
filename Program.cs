@@ -54,6 +54,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles(); // to static files
-app.MapControllers(); // to work with controllers
+app.MapControllers().RequireAuthorization(); // to work with controllers and authorization
 
 app.Run();
