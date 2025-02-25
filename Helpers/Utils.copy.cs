@@ -30,7 +30,7 @@ class UtilsCopy
     MailMessage mail = new();
     mail.To.Add(email);
     string Body = content;
-    mail.From = new MailAddress("klee.collage@gmail.com");
+    mail.From = new MailAddress("company_mail@ecorp.com");
     mail.Subject = subject;
     mail.Body = Body;
     mail.IsBodyHtml = true;
@@ -40,7 +40,7 @@ class UtilsCopy
         Host = "sandbox.smtp.mailtrap.io",
         Port = 587,
         UseDefaultCredentials = false,
-        Credentials = new System.Net.NetworkCredential("USER", "PASSWORD"),
+        Credentials = new System.Net.NetworkCredential("<USERNAME>", "<PASSWORD>"),
         EnableSsl = true
     };
 
