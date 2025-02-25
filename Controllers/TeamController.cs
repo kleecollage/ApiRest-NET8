@@ -41,7 +41,32 @@ public class TeamController(ApplicationDbContext context): Controller
 
     return new GenericResponseDto {
       Status = "OK",
-      Message = $"Team added successfully | {dto}"
+      Message = $"Team added successfully"
+    };
+  }
+
+  [HttpPut]
+  [Route("/api/teams/{id}")]
+  public GenericResponseDto PutMethod(int Id, TeamDto dto){
+    Equipo update = _teamRepository.GetById(Id);
+    update.Nombre = dto.Name;
+    update.Slug = new SlugHelper().GenerateSlug(dto.Name);
+    _teamRepository.Update(update);
+
+    return new GenericResponseDto {
+      Status = "OK",
+      Message = $"Team updated successfully"
+    };
+  }
+
+  [HttpDelete]
+  [Route("/api/teams/{id}")]
+  public GenericResponseDto DeleteMethod(int Id){
+    _teamRepository.Delete(Id);
+
+    return new GenericResponseDto {
+      Status = "OK",
+      Message = $"Team removed successfully"
     };
   }
 }
