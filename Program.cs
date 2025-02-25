@@ -3,16 +3,34 @@ using Microsoft.EntityFrameworkCore;
 // JWT imports
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
+using Microsoft.OpenApi.Models; // Swagger
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "API Rest .NET 8",
+        Description = "Full example of profesional API Rest with JWT",
+        TermsOfService = new Uri("https://www.cesarcancino.com"),
+        Contact = new OpenApiContact
+        {
+            Name = "Contact With Us",
+            Url = new Uri("https://www.cesarcancino.com")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "License",
+            Url = new Uri("https://www.cesarcancino.com")
+        }
+    });
+});
 
 builder.Services.AddControllers(); // To work with controllers
 builder.Services.AddCors(); // CORS
