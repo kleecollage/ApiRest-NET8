@@ -22,7 +22,7 @@ public class ExampleController(IWebHostEnvironment hostingEnvironment): Controll
     // return Content("GET Method from my api rest");
     return new GenericResponseDto {
       Status = "OK",
-      Mesage = $"GET Method | Heder = {headerValue}"
+      Message = $"GET Method | Heder = {headerValue}"
     };
   }
 
@@ -41,7 +41,7 @@ public class ExampleController(IWebHostEnvironment hostingEnvironment): Controll
     // return Content($"POST method | Name: {dto.Name}");
     return new GenericResponseDto {
       Status = "OK",
-      Mesage = $"POST method | Name: {dto.Name}"
+      Message = $"POST method | Name: {dto.Name}"
     };
   }
 
@@ -61,7 +61,7 @@ public class ExampleController(IWebHostEnvironment hostingEnvironment): Controll
     return new GenericResponseDto
     {
       Status = "OK",
-      Mesage = $"File created successfully | path = {filePath} | files = {files + extension}"
+      Message = $"File created successfully | path = {filePath} | files = {files + extension}"
     };
   }
 

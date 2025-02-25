@@ -1,4 +1,5 @@
 using ApiRest.Data;
+using ApiRest.Dto;
 using ApiRest.Models;
 using ApiRest.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -19,5 +20,21 @@ public class TeamController(ApplicationDbContext context): Controller
     return _teamRepository.GetAll();
   }
 
+  [HttpGet]
+  [Route("/api/teams/{id}")]
+  public Equipo GetMethod(int id)
+  {
+    return _teamRepository.GetById(id);
+  }
 
+  [HttpPost]
+  [Route("/api/temas")]
+  public GenericResponseDto PostMethod(Equipo model)
+  {
+
+    return new GenericResponseDto {
+      Status = "OK",
+      Message = "OK"
+    };
+  }
 }
