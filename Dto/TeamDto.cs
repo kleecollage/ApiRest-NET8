@@ -2,5 +2,5 @@ namespace ApiRest.Dto;
 
 public class TeamDto()
 {
-  public string Nombre { get; set; }
+  public string Name { get; set; }
 }

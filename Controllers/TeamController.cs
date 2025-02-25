@@ -3,6 +3,7 @@ using ApiRest.Dto;
 using ApiRest.Models;
 using ApiRest.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Slugify;
 
 namespace ApiRest.Controllers;
 
@@ -28,13 +29,19 @@ public class TeamController(ApplicationDbContext context): Controller
   }
 
   [HttpPost]
-  [Route("/api/temas")]
-  public GenericResponseDto PostMethod(Equipo model)
+  [Route("/api/teams")]
+  public GenericResponseDto PostMethod(TeamDto dto)
   {
+    _teamRepository.Add(new Equipo
+      {
+        Nombre = dto.Name,
+        Slug = new SlugHelper().GenerateSlug(dto.Name)
+      }
+    );
 
     return new GenericResponseDto {
       Status = "OK",
-      Message = "OK"
+      Message = $"Team added successfully | {dto}"
     };
   }
 }
