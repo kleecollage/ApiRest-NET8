@@ -7,7 +7,7 @@ public class Jugador
 
   public string Slug { get; set; }
 
-  public string Posicon { get; set; }
+  public string Posicion { get; set; }
 
   public DateTime Fecha { get; set; }
 
