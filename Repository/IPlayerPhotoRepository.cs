@@ -3,8 +3,7 @@ namespace ApiRest.Repository;
 public interface IPlayerPhotoRepository<T>
 {
   T GetById(int id);
-  IEnumerable<T> GetAll();
+  List<T> GetPhotosByPlayer(int Id);
   void Add(T entity);
-  void Update(T entity);
   void Delete(int id);
 }
