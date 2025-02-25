@@ -19,6 +19,7 @@ public class UserRepository(ApplicationDbContext context): IUserRepository<Usuar
         return await _context.Set<Usuario>()
           .Where(u => u.Correo == email)
           .Where(u => u.Password == password)
+          .Where(u => u.Estado == 1)
           .FirstOrDefaultAsync();
     }
 
