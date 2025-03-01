@@ -14,10 +14,11 @@ namespace ApiRest.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AccessController(ApplicationDbContext context): Controller
+public class AccessController(ApplicationDbContext context, IConfiguration configuration): Controller
 {
   private readonly UserRepository _userRepository = new(context);
   private readonly GlobalVariablesRepository _globalVariablesRepository = new(context);
+  private readonly IConfiguration _configuration = configuration;
 
   // ##############################   REGISTER   ############################## //
   [HttpPost]
@@ -88,11 +89,6 @@ public class AccessController(ApplicationDbContext context): Controller
   [Route("/api/access/login")]
   public async Task<IResult> LoginMethod(LoginDto dto)
   {
-    var builder = new ConfigurationBuilder()
-      .SetBasePath(Directory.GetCurrentDirectory())
-      .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-    IConfiguration configuration = builder.Build();
-
     Usuario user = await _userRepository.GetUser(dto.Email, Utils.CreatePassword(dto.Password));
     if (user == null)
     {
@@ -101,9 +97,9 @@ public class AccessController(ApplicationDbContext context): Controller
       });
     }
 
-    var issuer = configuration["Jwt:Issuer"];
-    var audience = configuration["Jwt:Audience"];
-    var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]);
+    var issuer = _configuration["Jwt:Issuer"];
+    var audience = _configuration["Jwt:Audience"];
+    var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
     // JWT Payload
     var tokenDescriptor = new SecurityTokenDescriptor
     {
